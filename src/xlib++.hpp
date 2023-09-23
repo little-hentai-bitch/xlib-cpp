@@ -8,8 +8,17 @@ typedef unsigned int uint;
 namespace X {
 
 Display *OpenDisplay(const char *display_name);
+
+Screen *ScreenOfDisplay(Display *display, int screen_number);
+
+int DefaultScreen(Display *display);
+
 Screen *DefaultScreenOfDisplay(Display *display);
+
 Window RootWindowOfScreen(Screen *screen);
+
+Window RootWindow(Display *display, int screen_number);
+
 int GetGeometry(Display *display, Window window, Window *root_window, int *x,
                 int *y, uint *width, uint *height, uint *borders, uint *depth);
 
@@ -48,5 +57,9 @@ int XGetGCValues(Display *display, GC gc, unsigned long mask,
 int XConnectionNumber(Display *display);
 
 int XFlush(Display *display);
+
+XImage *XGetImage(Display *display, Drawable drawable, int x, int y,
+                  unsigned int width, unsigned int height,
+                  unsigned long plane_mask, int format);
 
 } // namespace X

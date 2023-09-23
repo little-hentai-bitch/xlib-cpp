@@ -106,4 +106,33 @@ struct XGCValues {
   char dashes;
 };
 
+typedef struct _XImage {
+  int width, height;
+  int xoffset;
+  int format;
+  char *data;
+  int byte_order;
+  int bitmap_unit;
+  int bitmap_bit_order;
+  int bitmap_pad;
+  int depth;
+  int bytes_per_line;
+  int bits_per_pixel;
+  unsigned long red_mask;
+  unsigned long green_mask;
+  unsigned long blue_mask;
+  XPointer obdata;
+  struct funcs {
+    struct _XImage *(*create_image)(struct _XDisplay *, Visual *, unsigned int,
+                                    int, int, char *, unsigned int,
+                                    unsigned int, int, int);
+    int (*destroy_image)(struct _XImage *);
+    unsigned long (*get_pixel)(struct _XImage *, int, int);
+    int (*put_pixel)(struct _XImage *, int, int, unsigned long);
+    struct _XImage *(*sub_image)(struct _XImage *, int, int, unsigned int,
+                                 unsigned int);
+    int (*add_pixel)(struct _XImage *, long);
+  } f;
+} XImage;
+
 } // namespace X

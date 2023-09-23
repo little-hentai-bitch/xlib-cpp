@@ -2,6 +2,9 @@
 
 #include "implementation.hpp"
 
+#undef ScreenOfDisplay
+#undef DefaultScreen
+#undef RootWindow
 #undef DefaultScreenOfDisplay
 #undef RootWindowOfScreen
 
@@ -11,13 +14,25 @@ Display *OpenDisplay(const char *display_name) {
   return (Display *)::XOpenDisplay("");
 }
 
+int DefaultScreen(Display *display) {
+  return (((_XPrivDisplay)(display))->default_screen);
+}
+
 Screen *DefaultScreenOfDisplay(Display *display) {
-  int screen_i = ((_XPrivDisplay)(display))->default_screen;
-  ::Screen *native_screen = (&((_XPrivDisplay)(display))->screens[screen_i]);
+  int screen_num = DefaultScreen(display);
+  ::Screen *native_screen = (&((_XPrivDisplay)(display))->screens[screen_num]);
   return (X::Screen *)native_screen;
 }
 
+Screen *ScreenOfDisplay(Display *display, int screen_number) {
+  return (X::Screen *)(&((_XPrivDisplay)(display))->screens[screen_number]);
+}
+
 Window RootWindowOfScreen(Screen *screen) { return (screen->root); }
+
+Window RootWindow(Display *display, int screen_number) {
+  return ScreenOfDisplay(display, screen_number)->root;
+}
 
 int GetGeometry(Display *display, Window window, Window *root_window, int *x,
                 int *y, uint *width, uint *height, uint *borders, uint *depth) {
@@ -87,5 +102,13 @@ int XConnectionNumber(Display *display) {
 }
 
 int XFlush(Display *display) { return ::XFlush((::Display *)display); }
+
+XImage *XGetImage(Display *display, Drawable drawable, int x, int y,
+                  unsigned int width, unsigned int height,
+                  unsigned long plane_mask, int format) {
+  return (XImage *)::XGetImage((::Display *)display, drawable, x, y, width,
+                               height, plane_mask, format);
+}
+
 
 } // namespace X

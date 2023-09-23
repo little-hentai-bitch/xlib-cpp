@@ -356,6 +356,8 @@ constexpr auto FontRightToLeft = 1;
 
 constexpr auto FontChange = 255;
 
+constexpr auto AllPlanes = (unsigned long)~0L;
+
 constexpr auto XYBitmap = 0;
 constexpr auto XYPixmap = 1;
 constexpr auto ZPixmap = 2;
