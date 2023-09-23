@@ -1,0 +1,8 @@
+*
+!src
+!src/*
+!include
+!include/*
+!.clang-format
+!.gitignore
+!CMakeLists.txt
