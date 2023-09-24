@@ -148,4 +148,29 @@ Colormap CreateColormap(Display *display, Window window, Visual *visual,
                                      (::Visual *)visual, alloc);
 }
 
+int GrabKeyboard(Display *display, Window window, bool owner_events,
+                 int pointer_mode, int keyboard_mode, Time time) {
+  return ::XGrabKeyboard((::Display *)display, window, owner_events,
+                         pointer_mode, keyboard_mode, time);
+}
+
+int GrabPointer(Display *display, Window window, bool owner_events,
+                unsigned int event_mask, int pointer_mode, int keyboard_mode,
+                Window confine_to, Cursor cursor, Time time) {
+  return ::XGrabPointer((::Display *)display, window, owner_events, event_mask,
+                        pointer_mode, keyboard_mode, confine_to, cursor, time);
+}
+
+int UngrabKeyboard(Display *display, Time time) {
+  return ::XUngrabKeyboard((::Display *)display, time);
+}
+
+int UngrabPointer(Display *display, Time time) {
+  return ::XUngrabPointer((::Display *)display, time);
+}
+
+KeySym LookupKeysym(XKeyEvent *key_event, int index) {
+  return XLookupKeysym((::XKeyEvent *)key_event, index);
+}
+
 } // namespace X

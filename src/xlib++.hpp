@@ -1,6 +1,7 @@
 #pragma once
 #include "data_types.hpp"
 #include "defines.hpp"
+#include "xkb_defines.hpp"
 #include "events.hpp"
 
 typedef unsigned int uint;
@@ -80,5 +81,18 @@ Visual *DefaultVisual(Display *display, int screen_num);
 
 Colormap CreateColormap(Display *display, Window window, Visual *visual,
                         int alloc);
+
+int GrabKeyboard(Display *display, Window window, bool owner_events,
+                 int pointer_mode, int keyboard_mode, Time time);
+
+int GrabPointer(Display *display, Window window, bool owner_events,
+                unsigned int event_mask, int pointer_mode, int keyboard_mode,
+                Window confine_to, Cursor cursor, Time time);
+
+int UngrabKeyboard(Display *display, Time time);
+
+int UngrabPointer(Display *display, Time time);
+
+KeySym LookupKeysym(XKeyEvent *key_event, int index);
 
 } // namespace X
