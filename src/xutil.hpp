@@ -106,16 +106,16 @@ typedef struct {
   char *res_class;
 } XClassHint;
 
-int XDestroyImage(XImage *ximage);
+int DestroyImage(Image *ximage);
 
-unsigned long XGetPixel(XImage *ximage, int x, int y);
+unsigned long GetPixel(Image *ximage, int x, int y);
 
-int XPutPixel(XImage *ximage, int x, int y, unsigned long pixel);
+int PutPixel(Image *ximage, int x, int y, unsigned long pixel);
 
-XImage *XSubImage(XImage *ximage, int x, int y, unsigned int width,
+Image *SubImage(Image *ximage, int x, int y, unsigned int width,
                   unsigned int height);
 
-int XAddPixel(XImage *ximage, long value);
+int AddPixel(Image *ximage, long value);
 
 typedef struct _XComposeStatus {
   XPointer compose_ptr;

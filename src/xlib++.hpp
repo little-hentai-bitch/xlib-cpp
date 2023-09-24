@@ -7,6 +7,8 @@ typedef unsigned int uint;
 
 namespace X {
 
+int CloseDisplay(Display *display);
+
 Display *OpenDisplay(const char *display_name);
 
 Screen *ScreenOfDisplay(Display *display, int screen_number);
@@ -18,6 +20,16 @@ Screen *DefaultScreenOfDisplay(Display *display);
 Window RootWindowOfScreen(Screen *screen);
 
 Window RootWindow(Display *display, int screen_number);
+
+Window CreateWindow(Display *display, Window parent, int x, int y,
+                    unsigned int width, unsigned int height,
+                    unsigned int border_width, int depth,
+                    unsigned int window_class, Visual *visual,
+                    unsigned long valuemask, SetWindowAttributes *attributes);
+
+int MapWindow(Display *display, Window window);
+
+int DestroyWindow(Display *display, Window window);
 
 int GetGeometry(Display *display, Window window, Window *root_window, int *x,
                 int *y, uint *width, uint *height, uint *borders, uint *depth);
@@ -58,8 +70,15 @@ int XConnectionNumber(Display *display);
 
 int XFlush(Display *display);
 
-XImage *XGetImage(Display *display, Drawable drawable, int x, int y,
-                  unsigned int width, unsigned int height,
-                  unsigned long plane_mask, int format);
+Image *XGetImage(Display *display, Drawable drawable, int x, int y,
+                 unsigned int width, unsigned int height,
+                 unsigned long plane_mask, int format);
+
+int DefaultDepth(Display *display, int screen_num);
+
+Visual *DefaultVisual(Display *display, int screen_num);
+
+Colormap CreateColormap(Display *display, Window window, Visual *visual,
+                        int alloc);
 
 } // namespace X

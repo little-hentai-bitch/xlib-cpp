@@ -133,6 +133,24 @@ typedef struct _XImage {
                                  unsigned int);
     int (*add_pixel)(struct _XImage *, long);
   } f;
-} XImage;
+} Image;
+
+typedef struct {
+  Pixmap background_pixmap;       /* background or None or ParentRelative */
+  unsigned long background_pixel; /* background pixel */
+  Pixmap border_pixmap;           /* border of the window */
+  unsigned long border_pixel;     /* border pixel value */
+  int bit_gravity;                /* one of bit gravity values */
+  int win_gravity;                /* one of the window gravity values */
+  int backing_store;              /* NotUseful, WhenMapped, Always */
+  unsigned long backing_planes;   /* planes to be preserved if possible */
+  unsigned long backing_pixel;    /* value to use in restoring planes */
+  bool save_under;                /* should bits under be saved? (popups) */
+  long event_mask;                /* set of events that should be saved */
+  long do_not_propagate_mask;     /* set of events that should not propagate */
+  bool override_redirect;         /* boolean value for override-redirect */
+  Colormap colormap;              /* color map to be associated with window */
+  Cursor cursor;                  /* cursor to be displayed (or None) */
+} SetWindowAttributes;
 
 } // namespace X

@@ -3,12 +3,18 @@
 #include "implementation.hpp"
 
 #undef ScreenOfDisplay
+#undef DefaultDepth
+#undef DefaultVisual
 #undef DefaultScreen
 #undef RootWindow
 #undef DefaultScreenOfDisplay
 #undef RootWindowOfScreen
 
 namespace X {
+
+int CloseDisplay(Display *display) {
+  return ::XCloseDisplay((::Display *)display);
+}
 
 Display *OpenDisplay(const char *display_name) {
   return (Display *)::XOpenDisplay("");
@@ -32,6 +38,24 @@ Window RootWindowOfScreen(Screen *screen) { return (screen->root); }
 
 Window RootWindow(Display *display, int screen_number) {
   return ScreenOfDisplay(display, screen_number)->root;
+}
+
+Window CreateWindow(Display *display, Window parent, int x, int y,
+                    unsigned int width, unsigned int height,
+                    unsigned int border_width, int depth,
+                    unsigned int window_class, Visual *visual,
+                    unsigned long valuemask, SetWindowAttributes *attributes) {
+  return ::XCreateWindow((::Display *)display, parent, x, y, width, height,
+                         border_width, depth, window_class, (::Visual *)visual,
+                         valuemask, (::XSetWindowAttributes *)attributes);
+}
+
+int MapWindow(Display *display, Window window) {
+  return ::XMapWindow((::Display *)display, window);
+}
+
+int DestroyWindow(Display *display, Window window) {
+  return ::XDestroyWindow((::Display *)display, window);
 }
 
 int GetGeometry(Display *display, Window window, Window *root_window, int *x,
@@ -103,12 +127,25 @@ int XConnectionNumber(Display *display) {
 
 int XFlush(Display *display) { return ::XFlush((::Display *)display); }
 
-XImage *XGetImage(Display *display, Drawable drawable, int x, int y,
-                  unsigned int width, unsigned int height,
-                  unsigned long plane_mask, int format) {
-  return (XImage *)::XGetImage((::Display *)display, drawable, x, y, width,
-                               height, plane_mask, format);
+Image *XGetImage(Display *display, Drawable drawable, int x, int y,
+                 unsigned int width, unsigned int height,
+                 unsigned long plane_mask, int format) {
+  return (Image *)::XGetImage((::Display *)display, drawable, x, y, width,
+                              height, plane_mask, format);
 }
 
+int DefaultDepth(Display *display, int screen_num) {
+  return ScreenOfDisplay(display, screen_num)->root_depth;
+}
+
+Visual *DefaultVisual(Display *display, int screen_num) {
+  return ScreenOfDisplay(display, screen_num)->root_visual;
+}
+
+Colormap CreateColormap(Display *display, Window window, Visual *visual,
+                        int alloc) {
+  return (Colormap)::XCreateColormap((::Display *)display, window,
+                                     (::Visual *)visual, alloc);
+}
 
 } // namespace X

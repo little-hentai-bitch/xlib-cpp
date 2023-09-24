@@ -22,24 +22,24 @@ XVisualInfo *XGetVisualInfo(Display *display, long vinfo_mask,
                                          nitems_return);
 }
 
-int XDestroyImage(XImage *ximage) {
+int DestroyImage(Image *ximage) {
   return ((*(ximage->f.destroy_image))(ximage));
 }
 
-unsigned long XGetPixel(XImage *ximage, int x, int y) {
+unsigned long GetPixel(Image *ximage, int x, int y) {
   return ((*(ximage->f.get_pixel))(ximage, x, y));
 }
 
-int XPutPixel(XImage *ximage, int x, int y, unsigned long pixel) {
+int PutPixel(Image *ximage, int x, int y, unsigned long pixel) {
   return ((*(ximage->f.put_pixel))(ximage, x, y, pixel));
 }
 
-XImage *XSubImage(XImage *ximage, int x, int y, unsigned int width,
+Image *SubImage(Image *ximage, int x, int y, unsigned int width,
                   unsigned int height) {
   return ((*(ximage->f.sub_image))(ximage, x, y, width, height));
 }
 
-int XAddPixel(XImage *ximage, long value) {
+int AddPixel(Image *ximage, long value) {
   return ((*(ximage->f.add_pixel))(ximage, value));
 }
 
