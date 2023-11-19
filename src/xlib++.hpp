@@ -1,8 +1,8 @@
 #pragma once
 #include "data_types.hpp"
 #include "defines.hpp"
-#include "xkb_defines.hpp"
 #include "events.hpp"
+#include "xkb_defines.hpp"
 
 typedef unsigned int uint;
 
@@ -17,6 +17,8 @@ Screen *ScreenOfDisplay(Display *display, int screen_number);
 int DefaultScreen(Display *display);
 
 Screen *DefaultScreenOfDisplay(Display *display);
+
+int ScreenNumberOfScreen(Screen *screen);
 
 Window RootWindowOfScreen(Screen *screen);
 
@@ -56,6 +58,9 @@ int XClearWindow(Display *display, Window window);
 int XFree(void *ptr);
 
 Atom XInternAtom(Display *display, const char *atom_name, bool only_if_exist);
+
+int GetWindowAttributes(Display *display, Window window,
+                        WindowAttributes *attributes);
 
 int XGetWindowProperty(Display *display, Window window, Atom property,
                        long long_offset, long long_length, bool _delete,

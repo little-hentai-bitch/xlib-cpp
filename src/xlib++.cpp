@@ -10,6 +10,8 @@
 #undef DefaultScreenOfDisplay
 #undef RootWindowOfScreen
 
+XWindowAttributes f;
+
 namespace X {
 
 int CloseDisplay(Display *display) {
@@ -28,6 +30,10 @@ Screen *DefaultScreenOfDisplay(Display *display) {
   int screen_num = DefaultScreen(display);
   ::Screen *native_screen = (&((_XPrivDisplay)(display))->screens[screen_num]);
   return (X::Screen *)native_screen;
+}
+
+int ScreenNumberOfScreen(X::Screen *screen) {
+  return ::XScreenNumberOfScreen((::Screen *)screen);
 }
 
 Screen *ScreenOfDisplay(Display *display, int screen_number) {
@@ -101,6 +107,12 @@ int XFree(void *ptr) { return ::XFree(ptr); }
 
 Atom XInternAtom(Display *display, const char *atom_name, bool only_if_exist) {
   return ::XInternAtom((::Display *)display, atom_name, only_if_exist);
+}
+
+int GetWindowAttributes(Display *display, Window window,
+                        WindowAttributes *attributes) {
+  return ::XGetWindowAttributes((::Display *)display, (::Window)window,
+                                (::XWindowAttributes *)attributes);
 }
 
 int XGetWindowProperty(Display *display, Window window, Atom property,
