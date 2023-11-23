@@ -253,14 +253,14 @@ constexpr auto XkbOD_ConnectionRefused = 2;
 constexpr auto XkbOD_NonXkbServer = 3;
 constexpr auto XkbOD_BadServerVersion = 4;
 
-constexpr auto XkbLC_ForceLatin1Lookup = (1 << 0);
-constexpr auto XkbLC_ConsumeLookupMods = (1 << 1);
-constexpr auto XkbLC_AlwaysConsumeShiftAndLock = (1 << 2);
-constexpr auto XkbLC_IgnoreNewKeyboards = (1 << 3);
-constexpr auto XkbLC_ControlFallback = (1 << 4);
-constexpr auto XkbLC_ConsumeKeysOnComposeFail = (1 << 29);
-constexpr auto XkbLC_ComposeLED = (1 << 30);
-constexpr auto XkbLC_BeepOnComposeFail = (1 << 31);
+constexpr unsigned int XkbLC_ForceLatin1Lookup = (1 << 0);
+constexpr unsigned int XkbLC_ConsumeLookupMods = (1 << 1);
+constexpr unsigned int XkbLC_AlwaysConsumeShiftAndLock = (1 << 2);
+constexpr unsigned int XkbLC_IgnoreNewKeyboards = (1 << 3);
+constexpr unsigned int XkbLC_ControlFallback = (1 << 4);
+constexpr unsigned int XkbLC_ConsumeKeysOnComposeFail = (1 << 29);
+constexpr unsigned int XkbLC_ComposeLED = (1 << 30);
+constexpr unsigned int XkbLC_BeepOnComposeFail = (1 << 31);
 
 constexpr auto XkbLC_AllComposeControls = (0xc0000000);
 constexpr auto XkbLC_AllControls = (0xc000001f);

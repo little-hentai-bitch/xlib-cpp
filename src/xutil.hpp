@@ -28,17 +28,17 @@ typedef struct {
   int win_gravity;
 } XSizeHints;
 
-constexpr auto USPosition = (1L << 0);
-constexpr auto USSize = (1L << 1);
+constexpr unsigned int USPosition = (1L << 0);
+constexpr unsigned int USSize = (1L << 1);
 
-constexpr auto PPosition = (1L << 2);
-constexpr auto PSize = (1L << 3);
-constexpr auto PMinSize = (1L << 4);
-constexpr auto PMaxSize = (1L << 5);
-constexpr auto PResizeInc = (1L << 6);
-constexpr auto PAspect = (1L << 7);
-constexpr auto PBaseSize = (1L << 8);
-constexpr auto PWinGravity = (1L << 9);
+constexpr unsigned int PPosition = (1L << 2);
+constexpr unsigned int PSize = (1L << 3);
+constexpr unsigned int PMinSize = (1L << 4);
+constexpr unsigned int PMaxSize = (1L << 5);
+constexpr unsigned int PResizeInc = (1L << 6);
+constexpr unsigned int PAspect = (1L << 7);
+constexpr unsigned int PBaseSize = (1L << 8);
+constexpr unsigned int PWinGravity = (1L << 9);
 
 constexpr auto PAllHints =
     (PPosition | PSize | PMinSize | PMaxSize | PResizeInc | PAspect);
@@ -55,17 +55,17 @@ typedef struct {
 
 } XWMHints;
 
-constexpr auto InputHint = (1L << 0);
-constexpr auto StateHint = (1L << 1);
-constexpr auto IconPixmapHint = (1L << 2);
-constexpr auto IconWindowHint = (1L << 3);
-constexpr auto IconPositionHint = (1L << 4);
-constexpr auto IconMaskHint = (1L << 5);
-constexpr auto WindowGroupHint = (1L << 6);
+constexpr unsigned int InputHint = (1L << 0);
+constexpr unsigned int StateHint = (1L << 1);
+constexpr unsigned int IconPixmapHint = (1L << 2);
+constexpr unsigned int IconWindowHint = (1L << 3);
+constexpr unsigned int IconPositionHint = (1L << 4);
+constexpr unsigned int IconMaskHint = (1L << 5);
+constexpr unsigned int WindowGroupHint = (1L << 6);
 constexpr auto AllHints =
     (InputHint | StateHint | IconPixmapHint | IconWindowHint |
      IconPositionHint | IconMaskHint | WindowGroupHint);
-constexpr auto XUrgencyHint = (1L << 8);
+constexpr unsigned int XUrgencyHint = (1L << 8);
 
 constexpr auto WithdrawnState = 0;
 constexpr auto NormalState = 1;
